@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="glean-artifact-type" content="web_design">
+<title>AI Fundamentals Endorsement — Interactive Prep Guide</title>
+<style>
+:root {
+  --artifact-background: #ffffff;
+  --artifact-background-light: #f1f3f6;
+  --artifact-background-mid: #e9ecf1;
+  --artifact-border-light: #e3e6ec;
+  --artifact-border-dark: #cdd2db;
+  --artifact-primary-brand: #3559e6;
+  --artifact-primary-highlight: #0d0f14;
+  --artifact-primary-hover: #2442b8;
+  --artifact-selected: #eaeefc;
+  --artifact-text-primary: #11141a;
+  --artifact-text-secondary: #5c6470;
+  --artifact-text-highlight: #e8eefc;
+  --artifact-positive-background: #e8f6ee;
+  --artifact-positive-text: #11141a;
+  --artifact-positive: #159a6a;
+  --artifact-negative: #dc4c4c;
+}
+html[data-theme='dark'] {
+  --artifact-background: #0a0b0e;
+  --artifact-background-light: #121419;
+  --artifact-background-mid: #181b22;
+  --artifact-border-light: #23262e;
+  --artifact-border-dark: #343844;
+  --artifact-primary-brand: #6a92ff;
+  --artifact-primary-highlight: #f5f7fb;
+  --artifact-primary-hover: #88a8ff;
+  --artifact-selected: #1a2030;
+  --artifact-text-primary: #eef0f4;
+  --artifact-text-secondary: #9aa0ad;
+  --artifact-text-highlight: #14213d;
+  --artifact-positive-background: #0e2a1d;
+  --artifact-positive-text: #c8f5da;
+  --artifact-positive: #46d39a;
+  --artifact-negative: #ff6b6b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background-color: var(--artifact-background);
+  color: var(--artifact-text-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 19px;
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+}
+h1, h2 {
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--artifact-text-primary);
+  margin: 0;
+}
+.page-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 32px 80px;
+}
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  color: var(--artifact-primary-brand);
+}
+.subtitle {
+  color: var(--artifact-text-secondary);
+  font-size: 17px;
+  max-width: 680px;
+  margin-bottom: 44px;
+}
+
+/* Grid / table layout */
+.grid-table {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.grid-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 16px;
+  align-items: stretch;
+  border-top: 1px solid var(--artifact-border-light);
+  padding-top: 10px;
+}
+.grid-row:first-child { border-top: none; padding-top: 0; }
+.row-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--artifact-text-primary);
+  display: flex;
+  align-items: center;
+  padding-right: 8px;
+}
+.row-cells {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.q-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  text-align: left;
+  background: var(--artifact-background-light);
+  border: 1px solid var(--artifact-border-light);
+  border-radius: 6px;
+  padding: 14px 16px;
+  cursor: pointer;
+  color: var(--artifact-text-primary);
+  font-family: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+.q-btn:hover {
+  background: var(--artifact-selected);
+  border-color: var(--artifact-primary-brand);
+  transform: translateY(-1px);
+}
+.q-btn:focus-visible {
+  outline: 2px solid var(--artifact-primary-brand);
+  outline-offset: 2px;
+}
+.q-num {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--artifact-text-primary);
+}
+.q-label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--artifact-text-primary);
+}
+
+/* Detail view */
+.detail-view {
+  display: none;
+}
+.detail-view.active {
+  display: block;
+}
+.back-btn {
+  background: none;
+  border: 1px solid var(--artifact-border-light);
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--artifact-text-secondary);
+  cursor: pointer;
+  margin-bottom: 32px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.back-btn:hover {
+  border-color: var(--artifact-primary-brand);
+  color: var(--artifact-primary-brand);
+}
+.detail-eyebrow {
+  font-family: "SF Mono", "IBM Plex Mono", "Consolas", monospace;
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--artifact-primary-brand);
+  margin-bottom: 10px;
+}
+.detail-title {
+  font-size: clamp(1.85rem, 4.5vw, 2.5rem);
+  font-weight: 400;
+  margin-bottom: 28px;
+}
+.orig-question-block {
+  background: var(--artifact-background-light);
+  border: 1px solid var(--artifact-border-light);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+}
+.orig-label, .answer-label-top {
+  font-family: "SF Mono", "IBM Plex Mono", "Consolas", monospace;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--artifact-text-secondary);
+  margin-bottom: 10px;
+}
+.prompt-block {
+  background: var(--artifact-background-light);
+  border: 1px solid var(--artifact-border-light);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 36px;
+}
+.prompt-text {
+  font-size: 17px;
+  color: var(--artifact-text-secondary);
+  margin: 0;
+}
+.front-top-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.front-top-row .search-bar {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--artifact-background);
+  border: 1px solid var(--artifact-border-dark);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 28px;
+  transition: border-color 0.15s ease;
+  flex: 1;
+}
+.search-bar:focus-within {
+  border-color: var(--artifact-primary-brand);
+}
+.search-icon {
+  color: var(--artifact-text-secondary);
+  flex-shrink: 0;
+}
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 17px;
+  color: var(--artifact-text-primary);
+}
+.search-input::placeholder {
+  color: var(--artifact-text-secondary);
+}
+.search-count {
+  font-family: "SF Mono", "IBM Plex Mono", "Consolas", monospace;
+  font-size: 19px;
+  color: var(--artifact-text-secondary);
+  white-space: nowrap;
+}
+.search-clear-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--artifact-background-mid);
+  color: var(--artifact-text-secondary);
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.search-clear-btn.visible {
+  display: flex;
+}
+.search-clear-btn:hover {
+  background: var(--artifact-primary-brand);
+  color: var(--artifact-background);
+}
+.q-btn.hidden {
+  display: none;
+}
+.grid-row.hidden {
+  display: none;
+}
+.no-results {
+  display: none;
+  text-align: center;
+  padding: 48px 0;
+  color: var(--artifact-text-secondary);
+  font-size: 19px;
+}
+.no-results.active {
+  display: block;
+}
+.orig-question-text {
+  font-size: 17px;
+  font-style: italic;
+  color: var(--artifact-text-primary);
+  margin: 0;
+}
+.answer-block {
+  padding-top: 4px;
+}
+.ans-para {
+  font-size: 18px;
+  color: var(--artifact-text-primary);
+  margin: 0 0 16px 0;
+}
+.ans-label {
+  font-weight: 600;
+  color: var(--artifact-primary-brand);
+}
+
+@media screen and (max-width: 720px) {
+  .grid-row { grid-template-columns: 1fr; }
+  .row-cells { grid-template-columns: 1fr; }
+  .row-label { padding-bottom: 4px; }
+}
+
+@media print {
+  @page { size: auto !important; }
+  body {
+    margin: 0;
+    padding: 0.4in 0.6in;
+    background: #fff;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .back-btn { display: none; }
+  .detail-view { display: block !important; page-break-after: always; }
+  #front-grid { display: none !important; }
+}
+
+/* Question hover tooltip (full rubric question on hover) */
+.q-btn { position: relative; }
+.q-tooltip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 10px);
+  background: var(--artifact-primary-highlight);
+  color: var(--artifact-text-highlight);
+  padding: 14px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+}
+.q-btn:hover .q-tooltip,
+.q-btn:focus-visible .q-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Reusable coaching prompt (now beside the search bar) */
+.coaching-prompt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--artifact-primary-brand);
+  color: var(--artifact-text-highlight);
+  border: none;
+  border-radius: 8px;
+  padding: 14px 22px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.coaching-prompt-btn:hover {
+  background: var(--artifact-primary-hover);
+  transform: translateY(-1px);
+}
+.coaching-prompt-btn:focus-visible {
+  outline: 2px solid var(--artifact-primary-brand);
+  outline-offset: 2px;
+}
+.coaching-prompt-chevron {
+  transition: transform 0.2s ease;
+}
+.coaching-prompt-btn.open .coaching-prompt-chevron {
+  transform: rotate(180deg);
+}
+.coaching-prompt-panel {
+  display: none;
+  background: var(--artifact-background-light);
+  border: 1px solid var(--artifact-border-light);
+  border-radius: 8px;
+  padding: 22px 26px;
+  width: 100%;
+  margin-bottom: 28px;
+}
+.coaching-prompt-panel.open {
+  display: block;
+}
+.coaching-prompt-panel .orig-label {
+  margin-bottom: 12px;
+}
+
+@media print {
+  #coaching-prompt-btn, .coaching-prompt-panel { display: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <div id="front-grid" data-glean-id="front-grid">
+    <h1>AI Fundamentals Endorsement</h1>
+
+    <div class="front-top-row" data-glean-id="front-top-row">
+      <div class="search-bar" data-glean-id="question-search">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="question-search-input" class="search-input" placeholder="Search by keyword, persona, or concept (e.g. &quot;trade-off&quot;, &quot;CISO&quot;, &quot;lakehouse&quot;)..." oninput="filterQuestions(this.value)" autocomplete="off">
+        <span id="search-count" class="search-count"></span>
+        <button type="button" id="search-clear-btn" class="search-clear-btn" onclick="clearSearch()" aria-label="Clear search" title="Clear search">&times;</button>
+      </div>
+      <button type="button" class="coaching-prompt-btn" id="coaching-prompt-btn" data-glean-id="coaching-prompt-toggle-btn" onclick="toggleCoachingPrompt()">
+        <span>Reusable Coaching Prompt</span>
+        <svg class="coaching-prompt-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+    </div>
+    <div class="coaching-prompt-panel" id="coaching-prompt-panel" data-glean-id="coaching-prompt">
+      <div class="orig-label">Reusable Coaching Prompt</div>
+      <p class="prompt-text">Act as my AI Fundamentals Endorsement coach. I&#x27;ll give you a rubric scenario question. Give me the best possible response that would score 4/4 "Exceeds Expectations" against the official rubric criteria for that question. Format it in this exact order: (1) persona anchor + accurate technical distinction, (2) a named concrete trade-off, (3) a measurable business outcome, (4) a concrete example &mdash; example always last. Make the example Honeywell-specific; it can be hypothetical, not factual. Keep the full response under 150&ndash;170 words so it&#x27;s deliverable in under 90 seconds, interview style, no filler. Where the rubric calls for it, weave in Dell&#x27;s platform/partner positioning naturally in the business outcome, not as a separate pitch.</p>
+    </div>
+
+    <div class="grid-table" data-glean-id="grid-table">
+<div class="grid-row" data-glean-id="row-1">
+      <div class="row-label">Module 1 — Infrastructure</div>
+      <div class="row-cells"><button class="q-btn" data-glean-id="btn-q1" onclick="showDetail('Q1')">
+          <span class="q-num">Q1</span>
+          <span class="q-label">How different AI workloads (for example, real-time inference vs. large-scale training) drive different choices</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q1">You&#x27;re talking to an IT Architect who says, &quot;AI is just more compute.&quot; In their context, explain how different AI workloads (for example, real-time inference vs. large-scale training) drive different choices in compute, storage, and networking, and why those choices matter for performance and cost.</span>
+        </button><button class="q-btn" data-glean-id="btn-q2" onclick="showDetail('Q2')">
+          <span class="q-num">Q2</span>
+          <span class="q-label">Traditional applications and AI workloads on the same platform</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q2">You&#x27;re meeting a Head of Infrastructure who wants to run both traditional applications and AI workloads on the same platform. Explain how you would balance their infrastructure design across compute, storage, and networking to support both, and what trade-offs you would call out.</span>
+        </button><button class="q-btn" data-glean-id="btn-q3" onclick="showDetail('Q3')">
+          <span class="q-num">Q3</span>
+          <span class="q-label">Distinguish between a small GenAI pilot and a scalable GenAI platform.</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q3">A CTO wants to understand the infrastructure implications of &quot;trying GenAI.&quot; Explain how you would help them distinguish between a small GenAI pilot and a scalable GenAI platform, and what changes in infrastructure requirements as they move from one to the other.</span>
+        </button></div>
+    </div>
+<div class="grid-row" data-glean-id="row-2">
+      <div class="row-label">Module 2 — Orchestration</div>
+      <div class="row-cells"><button class="q-btn" data-glean-id="btn-q4" onclick="showDetail('Q4')">
+          <span class="q-num">Q4</span>
+          <span class="q-label">Infrastructure as Code, Kubernetes, and MLOps practices</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q4">You&#x27;re working with a Platform Engineer who is building an internal AI platform for multiple teams. Describe how you would combine Infrastructure as Code, Kubernetes, and MLOps practices to run AI workloads reliably across dev, test, and production, and what main benefits you&#x27;d highlight to them.</span>
+        </button><button class="q-btn" data-glean-id="btn-q5" onclick="showDetail('Q5')">
+          <span class="q-num">Q5</span>
+          <span class="q-label">Orchestration practices like Scheduling, dependency management, observability, and automated rollbacks</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q5">You&#x27;re meeting with a Head of Engineering who already has a few AI services in production and wants to avoid incidents as usage grows. Explain how orchestration practices like scheduling, dependency management, observability, and automated rollbacks help keep those AI workloads stable over time.</span>
+        </button><button class="q-btn" data-glean-id="btn-q6" onclick="showDetail('Q6')">
+          <span class="q-num">Q6</span>
+          <span class="q-label">AI pipelines from data ingest to training and deployment</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q6">You&#x27;re working with a Head of Data &amp; AI who wants end-to-end AI pipelines (from data ingest to model training and deployment) on a shared platform. Explain how orchestration coordinates the data and model steps in these pipelines and how that reduces failed runs, production surprises, and manual effort.</span>
+        </button></div>
+    </div>
+<div class="grid-row" data-glean-id="row-3">
+      <div class="row-label">Module 3 — Data Management</div>
+      <div class="row-cells"><button class="q-btn" data-glean-id="btn-q7" onclick="showDetail('Q7')">
+          <span class="q-num">Q7</span>
+          <span class="q-label">How Data lakes and data lakehouses differ from traditional data warehouse</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q7">You&#x27;re talking to a Head of Data whose mental model is still a single enterprise data warehouse. Explain how data lakes and data lakehouses differ from a traditional data warehouse, and why a lakehouse-style architecture is better suited to supporting AI workloads in terms of data types, performance, and agility.</span>
+        </button><button class="q-btn" data-glean-id="btn-q8" onclick="showDetail('Q8')">
+          <span class="q-num">Q8</span>
+          <span class="q-label">How a federated query engine like Trino or Starburst helps teams run SQL across multiple data sources</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q8">You&#x27;re meeting with an Analytics Platform Owner who supports both BI and AI teams. Explain how a federated query engine like Trino or Starburst helps teams run SQL across multiple data sources without centralizing everything first, and why that matters for accelerating AI and analytics projects.</span>
+        </button><button class="q-btn" data-glean-id="btn-q9" onclick="showDetail('Q9')">
+          <span class="q-num">Q9</span>
+          <span class="q-label">ETL/ELT processes and data pipelines in a modern environment</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q9">You&#x27;re meeting with a Head of Data &amp; Analytics who wants to modernize their ETL for AI. Explain how you think about ETL / ELT processes and data pipelines in a modern environment, and why good pipeline design is critical for reliable AI workloads.</span>
+        </button></div>
+    </div>
+<div class="grid-row" data-glean-id="row-4">
+      <div class="row-label">Module 4 — Data Engineering</div>
+      <div class="row-cells"><button class="q-btn" data-glean-id="btn-q10" onclick="showDetail('Q10')">
+          <span class="q-num">Q10</span>
+          <span class="q-label">From ingest and storage through transformation, governance, feature engineering, serving</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q10">End-to-end data engineering lifecycle&mdash;from ingest and storage through transformation, governance, feature engineering.</span>
+        </button><button class="q-btn" data-glean-id="btn-q11" onclick="showDetail('Q11')">
+          <span class="q-num">Q11</span>
+          <span class="q-label">Structured and unstructured data pipelines, including embeddings and vector stores</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q11">A BI Lead has many dashboards on structured data and now wants to add GenAI on PDFs and documents. Explain how structured and unstructured data pipelines differ, including the role of embeddings and vector stores, and why those differences affect timelines, quality, and infrastructure choices.</span>
+        </button><button class="q-btn" data-glean-id="btn-q12" onclick="showDetail('Q12')">
+          <span class="q-num">Q12</span>
+          <span class="q-label">Orchestration, data quality checks, schema and data drift monitoring</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q12">A Data Science Manager complains that models work in notebooks but fail in production. Explain how orchestration, data quality checks, schema and data drift monitoring, and a clean Data Engineering&ndash;to&ndash;Data Science handoff affect production reliability and trust in AI outputs.</span>
+        </button></div>
+    </div>
+<div class="grid-row" data-glean-id="row-5">
+      <div class="row-label">Module 5 — AI Software</div>
+      <div class="row-cells"><button class="q-btn" data-glean-id="btn-q13" onclick="showDetail('Q13')">
+          <span class="q-num">Q13</span>
+          <span class="q-label">Traditional AI, machine learning, and generative AI</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q13">A Line-of-Business leader says, &quot;We should just use GenAI for everything.&quot; In their context, explain the difference between traditional AI, machine learning, and generative AI, and give simple examples of when each is the better choice and why.</span>
+        </button><button class="q-btn" data-glean-id="btn-q14" onclick="showDetail('Q14')">
+          <span class="q-num">Q14</span>
+          <span class="q-label">ML engineers, MLOps engineers, app developers, platform teams</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q14">You&#x27;re with a CIO who assumes &quot;data scientists handle all the AI software.&quot; Explain the main AI software personas (such as ML engineers, MLOps engineers, app developers, platform teams), how they interact across different tools and stacks, and why this complexity matters when planning an AI platform.</span>
+        </button><button class="q-btn" data-glean-id="btn-q15" onclick="showDetail('Q15')">
+          <span class="q-num">Q15</span>
+          <span class="q-label">CPU/GPU profile, storage, networking, and platform integrations</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q15">A Software Architect believes that once they choose their preferred AI frameworks and ISVs, the underlying infrastructure is just a commodity detail. Explain how infrastructure choices (for example, CPU/GPU profile, storage, networking, and platform integrations) affect AI software workloads across sandbox and production environments, and why tight hardware&ndash;software alignment matters for their long-term AI strategy.</span>
+        </button></div>
+    </div>
+<div class="grid-row" data-glean-id="row-6">
+      <div class="row-label">Module 6 — AI Security</div>
+      <div class="row-cells"><button class="q-btn" data-glean-id="btn-q16" onclick="showDetail('Q16')">
+          <span class="q-num">Q16</span>
+          <span class="q-label">Risks around data volume, supply chain, model behavior, and regulation</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q16">A CISO tells you, &quot;We already have strong security; AI doesn&#x27;t change much.&quot; Explain why AI introduces new risks around data volume, supply chain, model behavior, and regulation, and why a full-stack approach to securing AI is different from traditional security.</span>
+        </button><button class="q-btn" data-glean-id="btn-q17" onclick="showDetail('Q17')">
+          <span class="q-num">Q17</span>
+          <span class="q-label">Securing the pipeline from development and training through runtime</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q17">An AI Program Owner thinks backups and Identity and Access Management (IAM) are enough to secure AI workloads. Explain how securing the pipeline from development and training (for example, data hygiene, privacy-enhancing technologies, static analysis) through runtime (guardrails, monitoring, cyber resilience) reduces their attack surface and operational risk.</span>
+        </button><button class="q-btn" data-glean-id="btn-q18" onclick="showDetail('Q18')">
+          <span class="q-num">Q18</span>
+          <span class="q-label">A secure foundation, ecosystem integrations, and services from that partner</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q18">In a joint meeting with a CISO and AI Officer, they ask why an infrastructure/platform partner should be part of their AI security strategy at all. Explain how a secure foundation, ecosystem integrations, and services from that partner can help build trust in AI deployments and what difference that makes to their ability to scale AI safely.</span>
+        </button></div>
+    </div>
+<div class="grid-row" data-glean-id="row-7">
+      <div class="row-label">Module 7 — AI Use Cases</div>
+      <div class="row-cells"><button class="q-btn" data-glean-id="btn-q19" onclick="showDetail('Q19')">
+          <span class="q-num">Q19</span>
+          <span class="q-label">Prioritize use cases and map an end-to-end stack</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q19">A Head of Strategy has a long list of AI ideas but no plan. Explain how you would prioritize use cases with them and then map an end-to-end stack&mdash;from infrastructure through orchestration, data, software, and security&mdash;that can support both those initial use cases and future ones.</span>
+        </button><button class="q-btn" data-glean-id="btn-q20" onclick="showDetail('Q20')">
+          <span class="q-num">Q20</span>
+          <span class="q-label">Tasks a good fit for AI (retrieval, summarization, classification, generation)</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q20">You&#x27;re meeting with a Customer Success Manager who is overwhelmed by manual work (searching past tickets, writing follow-up emails, updating systems). Describe how you would identify which of their tasks are a good fit for AI (for example, retrieval, summarization, classification, generation), and explain how you&#x27;d map those tasks to specific AI workload patterns.</span>
+        </button><button class="q-btn" data-glean-id="btn-q21" onclick="showDetail('Q21')">
+          <span class="q-num">Q21</span>
+          <span class="q-label">Define and track the success metrics for AI use cases</span>
+        <span class="q-tooltip" data-glean-id="tooltip-q21">You are working with a Business Unit Leader who has already launched a couple of AI pilots and now wants to decide which ones to scale. Explain how you would define and track the right success metrics for AI use cases, and how those metrics would inform the decision to expand, refine, or retire each use case.</span>
+        </button></div>
+    </div>
+    </div>
+    <div class="no-results" id="no-results-msg">No questions match your search. Try a different keyword.</div>
+  </div>
+
+<section class="detail-view" id="detail-Q1" data-glean-id="detail-q1">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 1 — Infrastructure &middot; Q1</div>
+      <h2 class="detail-title">Training vs. Inference Infra</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">You&#x27;re talking to an IT Architect who says, &quot;AI is just more compute.&quot; In their context, explain how different AI workloads (for example, real-time inference vs. large-scale training) drive different choices in compute, storage, and networking, and why those choices matter for performance and cost.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">AI isn&#x27;t one workload — training and inference pull infrastructure in opposite directions. Training needs maximum throughput: dense GPU clusters, high-bandwidth memory, fast storage for data and checkpoints, and GPU-to-GPU fabric like InfiniBand, so expensive GPUs don&#x27;t sit idle. Real-time inference needs predictable low latency: right-sized GPUs, fast local storage, efficient networking — nothing more than the request needs.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> a dedicated training cluster speeds development but costs far more than a lean inference footprint; using one design for both wastes spend or creates bottlenecks.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> aligning infrastructure to the workload hits performance targets while avoiding over-provisioning, runaway costs, and bottlenecks — exactly the split Dell&#x27;s AI-optimized platforms are built for.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell trains a predictive-maintenance model on plant sensor data using a dedicated GPU cluster with InfiniBand, cutting training from weeks to days, then deploys it on a smaller, latency-tuned inference setup near plant operations to flag equipment failures in real time.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q2" data-glean-id="detail-q2">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 1 — Infrastructure &middot; Q2</div>
+      <h2 class="detail-title">Shared App + AI Platform</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">You&#x27;re meeting a Head of Infrastructure who wants to run both traditional applications and AI workloads on the same platform. Explain how you would balance their infrastructure design across compute, storage, and networking to support both, and what trade-offs you would call out.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Balance starts from your estate, not a generic blueprint. Compute is a mixed pool — CPU nodes for steady transactional apps, pooled GPU nodes for AI, with scheduling that flexes between them. Storage is tiered — reliable transactional storage for apps, high-throughput storage for AI, so neither starves the other. Networking is segmented, so bursty AI traffic doesn&#x27;t congest everyday operations.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> shared infrastructure lowers cost and improves utilization, but AI workloads can spike and compete with everyday apps for the same resources if not carefully isolated.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> you run both cost-effectively on common infrastructure without one undermining the other&#x27;s SLAs — built on Dell&#x27;s AI-optimized platforms, straightforward to deploy into an existing estate.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell runs its plant MES system alongside a new AI vision-inspection model on the same platform — pooled GPU nodes absorb the bursty inspection workload while a segmented network keeps the plant floor&#x27;s control systems untouched.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q3" data-glean-id="detail-q3">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 1 — Infrastructure &middot; Q3</div>
+      <h2 class="detail-title">GenAI Pilot → Scale Platform</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">A CTO wants to understand the infrastructure implications of &quot;trying GenAI.&quot; Explain how you would help them distinguish between a small GenAI pilot and a scalable GenAI platform, and what changes in infrastructure requirements as they move from one to the other.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Let&#x27;s think of this as crawl, walk, run. Crawl — the pilot: a handful of users, narrow data, flexible SLAs, shared GPU capacity. Walk — departmental adoption: more users, firmer SLAs, dedicated GPU capacity, team isolation. Run — enterprise-wide: observability, governance, multi-tenancy, and resilience become non-negotiable because the business now depends on it.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> a pilot is fast and cheap to stand up, but scaling it later usually means re-architecting rather than just adding resources.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> planning the pilot with that path in mind avoids costly rework — the staged journey Dell&#x27;s AI-optimized platforms and experts are built to support, controlling TCO at each stage.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell&#x27;s field-service team pilots a GenAI tool that summarizes technician service reports for one region on shared cloud GPUs. Six months later, rolling it out across every business unit requires dedicated clusters and multi-tenant governance the pilot never needed.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q4" data-glean-id="detail-q4">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 2 — Orchestration &middot; Q4</div>
+      <h2 class="detail-title">IaC + Kubernetes + MLOps</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">You&#x27;re working with a Platform Engineer who is building an internal AI platform for multiple teams. Describe how you would combine Infrastructure as Code, Kubernetes, and MLOps practices to run AI workloads reliably across dev, test, and production, and what main benefits you&#x27;d highlight to them.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">For a platform engineer building this across multiple teams, these three practices work together as one connected pipeline, not separate tools. Infrastructure as Code gives repeatable clusters — the same dev, test, and prod environment every time. Kubernetes is the shared runtime on top, scheduling and scaling AI workloads, including GPU jobs, isolating teams through namespaces. MLOps closes the loop — automating build, deployment, and monitoring as models move through environments.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> standing up this unified platform takes real upfront investment in tooling, which can slow initial onboarding versus ad hoc setups.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> that investment reduces manual work, speeds iteration, and improves reliability for every team sharing the platform.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell&#x27;s platform engineering team supports both its Process Automation and Buildings Automation AI groups on one shared platform — when the building-tech team promotes a predictive-maintenance model from test to production, IaC guarantees the environment matches, Kubernetes handles the rollout, and MLOps automatically validates it, with no manual server work.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q5" data-glean-id="detail-q5">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 2 — Orchestration &middot; Q5</div>
+      <h2 class="detail-title">Scheduling &amp; Auto-Rollbacks</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">You&#x27;re meeting with a Head of Engineering who already has a few AI services in production and wants to avoid incidents as usage grows. Explain how orchestration practices like scheduling, dependency management, observability, and automated rollbacks help keep those AI workloads stable over time.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Picture a nightly model retrain. Scheduling ensures it gets the compute it needs without colliding with other jobs. Dependency management checks the data and prior model artifacts are ready before it runs. Observability — metrics, logs, traces — catches a quality drift before customers see it. If the new version is bad, automated rollback reverts to the last known-good state in minutes.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> building this orchestration layer adds engineering overhead versus a simpler manual deploy process.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> that overhead buys stable SLAs, fewer fire-drills, and confidence to keep experimenting as your AI footprint grows.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell&#x27;s predictive-maintenance service runs a nightly retrain on new sensor data. One night the retrain produces a model with a quality regression — observability flags it within minutes, and automated rollback reverts to the prior version before a single plant alert is affected.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q6" data-glean-id="detail-q6">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 2 — Orchestration &middot; Q6</div>
+      <h2 class="detail-title">End-to-End Pipeline Orchestration</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">You&#x27;re working with a Head of Data &amp; AI who wants end-to-end AI pipelines (from data ingest to model training and deployment) on a shared platform. Explain how orchestration coordinates the data and model steps in these pipelines and how that reduces failed runs, production surprises, and manual effort.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Let&#x27;s walk through one pipeline: data lands, gets validated, features get computed, a model trains, gets evaluated, and deploys. Orchestration enforces that each step only starts once its inputs are ready, handles retries on failure, and applies conditional logic — don&#x27;t promote a model if evaluation metrics miss the bar.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> building that coordination across the full chain takes more upfront design time, resources, and money than letting teams run disconnected scripts.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> that investment gets you fewer broken pipelines, fewer last-minute surprises, and more team time on higher-value work.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> at Honeywell, an overnight ingest job pulling new sensor readings fails. Because the model-training step depends on it, orchestration automatically holds the downstream training and deployment steps instead of running them against incomplete data — the team wakes up to a flagged failure, not a bad model already live on the plant floor.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q7" data-glean-id="detail-q7">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 3 — Data Management &middot; Q7</div>
+      <h2 class="detail-title">Warehouse vs. Lake vs. Lakehouse</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">You&#x27;re talking to a Head of Data whose mental model is still a single enterprise data warehouse. Explain how data lakes and data lakehouses differ from a traditional data warehouse, and why a lakehouse-style architecture is better suited to supporting AI workloads in terms of data types, performance, and agility.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Let&#x27;s break this into three layers, three jobs. A warehouse handles structured, relational data — great for reporting, rigid outside that lane. A lake stores anything — structured, unstructured, images, logs — cheaply at scale, but without warehouse-grade governance. A lakehouse unifies them: the lake&#x27;s openness plus warehouse-grade governance and transactional reliability.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> adopting a lakehouse means new tooling and governance practices versus staying in a familiar, already-governed warehouse.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> shorter AI delivery cycles, better model quality from richer data, and flexibility to add new data types without re-platforming.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell wants to combine maintenance logs, equipment sensor streams, and technician inspection photos to train one failure-prediction model. A warehouse-only approach forces pre-structuring everything first, costing months; a lakehouse lets the team bring it together as-is and iterate immediately.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q8" data-glean-id="detail-q8">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 3 — Data Management &middot; Q8</div>
+      <h2 class="detail-title">Federated Query (Trino)</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">You&#x27;re meeting with an Analytics Platform Owner who supports both BI and AI teams. Explain how a federated query engine like Trino or Starburst helps teams run SQL across multiple data sources without centralizing everything first, and why that matters for accelerating AI and analytics projects.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">A federated query engine like Trino lets BI and AI teams run standard SQL across your warehouse, your lake, and other systems as one logical layer — no centralization project first. Governance stays centralized; the query layer sits on top.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> federated queries can be slower than querying data that&#x27;s already centralized and tuned, especially for large, repeated workloads.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> you remove the centralization bottleneck, so both teams move faster now and defer full consolidation until it&#x27;s genuinely justified.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell&#x27;s analytics team joins ERP sales-order data in a warehouse with IoT sensor data in a lake using one Trino query — no pipeline required. The BI team builds a demand dashboard from it, while the AI team pulls the same joined dataset to train a parts-failure prediction model, both from one consistent view.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q9" data-glean-id="detail-q9">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 3 — Data Management &middot; Q9</div>
+      <h2 class="detail-title">Modern ETL/ELT Design</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">You&#x27;re meeting with a Head of Data &amp; Analytics who wants to modernize their ETL for AI. Explain how you think about ETL / ELT processes and data pipelines in a modern environment, and why good pipeline design is critical for reliable AI workloads.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Think of pipelines as products, not scripts — versioned, observable, resilient. That means shifting from traditional ETL — transform before load — to ELT: load raw data into a lakehouse first, then apply validated, versioned transformations downstream into modeled layers for AI.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> building resilient, versioned ELT pipelines takes more upfront engineering effort than one-off ETL scripts.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> fewer model failures caused by bad data, less firefighting, and AI products the organization can trust in production.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> at Honeywell, a transformation step in the demand-forecasting pipeline breaks silently and starts feeding a slightly wrong inventory figure into training. The model doesn&#x27;t crash — it quietly drifts, and forecasts miss for weeks before anyone traces it back. Built-in lineage and tests at that stage would have caught it immediately.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q10" data-glean-id="detail-q10">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 4 — Data Engineering &middot; Q10</div>
+      <h2 class="detail-title">Full Data Engineering Lifecycle</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">End-to-end data engineering lifecycle—from ingest and storage through transformation, governance, feature engineering.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">The notebook pull is the last step, not the first. Before that: ingest pulls data from source systems; storage lands it durably; transformation cleans and reshapes it; governance applies access controls and lineage; feature engineering turns it into consistent model inputs; and serving delivers those features to production reliably and fast.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> building out the full lifecycle with proper governance takes more coordination than letting people pull data ad hoc.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> you remove the risk of models silently trained on inconsistent data — the real cause of costly production incidents.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> a Honeywell quality-defect model performs great in testing on a notebook pull, then fails in production because the live feature pipeline computes &#x27;defect rate&#x27; differently than the notebook calculation did. Fixing that one feature-engineering stage would have caught it before deployment.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q11" data-glean-id="detail-q11">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 4 — Data Engineering &middot; Q11</div>
+      <h2 class="detail-title">Structured vs. Unstructured + Vectors</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">A BI Lead has many dashboards on structured data and now wants to add GenAI on PDFs and documents. Explain how structured and unstructured data pipelines differ, including the role of embeddings and vector stores, and why those differences affect timelines, quality, and infrastructure choices.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Your structured pipelines are ETL into a warehouse, queried with SQL — schema known upfront. Documents don&#x27;t have that luxury: ingest, parse and extract text, chunk it, embed each chunk into a numerical representation of meaning, index it in a vector store, then retrieve by semantic similarity rather than exact match.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> this needs new infrastructure — an embedding model, a vector database, GPU acceleration — extending timelines versus adding another table.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> investing properly unlocks real GenAI capability while avoiding inaccurate outputs, so scope expectations should be set upfront.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> instead of adding a table, Honeywell&#x27;s team extracts text from technical equipment manuals and compliance documents, embeds each section, and indexes it — so a technician asking &#x27;what&#x27;s the torque spec for this valve?&#x27; gets the exact relevant passage across thousands of manuals instantly.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q12" data-glean-id="detail-q12">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 4 — Data Engineering &middot; Q12</div>
+      <h2 class="detail-title">Notebook → Production Reliability</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">A Data Science Manager complains that models work in notebooks but fail in production. Explain how orchestration, data quality checks, schema and data drift monitoring, and a clean Data Engineering–to–Data Science handoff affect production reliability and trust in AI outputs.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">This is almost never a model-quality problem — it&#x27;s an engineering-discipline gap. Orchestrated pipelines with built-in validation give Data Science stable, documented feature sets instead of ad hoc pulls. Models deploy with drift monitoring, so when production data diverges from training data, you see it before performance degrades. A clean DE-to-DS handoff means the notebook matches exactly what runs in production.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> this adds overhead and slows the path from prototype to production versus just pushing a model live.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> catching data issues early protects the credibility of your AI program and builds stakeholder trust.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell&#x27;s demand-forecasting model works perfectly in a notebook. In production, an upstream system changes how a &#x27;promotion flag&#x27; is populated — without drift monitoring, nobody notices for weeks, and forecasts quietly go bad before anyone traces it back.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q13" data-glean-id="detail-q13">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 5 — AI Software &middot; Q13</div>
+      <h2 class="detail-title">Traditional AI vs. ML vs. GenAI</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">A Line-of-Business leader says, &quot;We should just use GenAI for everything.&quot; In their context, explain the difference between traditional AI, machine learning, and generative AI, and give simple examples of when each is the better choice and why.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Let&#x27;s sort your actual decisions into three buckets. Rules-fit — approvals, compliance checks — a traditional rule-based system is faster, cheaper, fully auditable. Prediction-fit — forecasting demand, scoring risk — machine learning trained on historical data gives accurate outputs GenAI isn&#x27;t built to produce reliably. Generation-fit — drafting, summarizing — generative AI excels because the task is language-heavy and open-ended.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> the simpler, purpose-built approach gives up flexibility for open-ended tasks but gains accuracy, predictability, and lower cost for well-defined ones.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> mapping each decision to the right AI type avoids wasted GenAI spend — exactly the mapping Dell can guide you through.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell uses machine learning, not GenAI, to forecast spare-parts demand across its distribution centers, but turns to generative AI to draft the technician service summaries that go out after every maintenance visit.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q14" data-glean-id="detail-q14">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 5 — AI Software &middot; Q14</div>
+      <h2 class="detail-title">AI Software Personas</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">You&#x27;re with a CIO who assumes &quot;data scientists handle all the AI software.&quot; Explain the main AI software personas (such as ML engineers, MLOps engineers, app developers, platform teams), how they interact across different tools and stacks, and why this complexity matters when planning an AI platform.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">A model doesn&#x27;t reach customers through one role. A data scientist builds it in a notebook. An ML engineer makes it production-ready. An MLOps engineer owns deployment, monitoring, and rollback. An app developer wires the prediction into the actual tool. A platform team maintains the shared infrastructure everyone depends on. Five distinct roles, not one.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> designing a platform that serves all five well takes more upfront investment than building narrowly for data scientists alone.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> a well-designed platform — which Dell helps enable — provides guardrails that keep the system sustainable, avoiding bottlenecks between teams.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> at Honeywell, a predictive-maintenance model built by a data scientist only reaches technicians after an ML engineer productionizes it, an MLOps engineer sets up monitoring, an app developer wires it into the field-service app, and the platform team ensures it all runs on governed infrastructure.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q15" data-glean-id="detail-q15">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 5 — AI Software &middot; Q15</div>
+      <h2 class="detail-title">Infra–Software Alignment</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">A Software Architect believes that once they choose their preferred AI frameworks and ISVs, the underlying infrastructure is just a commodity detail. Explain how infrastructure choices (for example, CPU/GPU profile, storage, networking, and platform integrations) affect AI software workloads across sandbox and production environments, and why tight hardware–software alignment matters for their long-term AI strategy.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Let&#x27;s tie this to the patterns you&#x27;re actually running. Large-batch training needs dense GPU memory and high-bandwidth networking for distributed jobs. Low-latency inference needs the right CPU/GPU balance and fast storage. Platform integrations matter too — frameworks assume specific drivers and orchestration support; misalignment causes instability moving from sandbox to production.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> tightly aligning infrastructure to your frameworks improves performance but reduces flexibility to switch vendors later without re-architecting.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> treating infrastructure as co-designed with your software stack gives a portable, scalable, supportable AI stack long-term, avoiding expensive re-platforming.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> a Honeywell engineering team tests a GenAI framework in a sandbox on generic CPU servers for a single-site pilot — works fine on small data. At enterprise scale across multiple plants, that same framework needs GPU acceleration and high-bandwidth networking for concurrency — an unplanned infrastructure overhaul the architect assumed wouldn&#x27;t be needed.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q16" data-glean-id="detail-q16">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 6 — AI Security &middot; Q16</div>
+      <h2 class="detail-title">AI-Specific Security Risks</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">A CISO tells you, &quot;We already have strong security; AI doesn&#x27;t change much.&quot; Explain why AI introduces new risks around data volume, supply chain, model behavior, and regulation, and why a full-stack approach to securing AI is different from traditional security.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Traditional security focuses on perimeter, access, and code vulnerabilities. AI workloads touch public pretrained models, open-source repositories, massive sensitive training data, and can produce unpredictable outputs through prompt injection or data leakage. AI also faces evolving regulation on privacy, bias, and explainability that standard compliance frameworks don&#x27;t cover.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> full-stack AI security — supply chain, operations, runtime — adds complexity and slows deployment versus relying on existing controls alone.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> that layered approach protects you from risks traditional security was never designed to catch — which is why you need an AI-aware strategy, not incremental tweaks.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell integrates a third-party pretrained model into its customer support chatbot. Without supply chain vetting, the model carries hidden biases from its fine-tuning data; without runtime monitoring, it starts giving inappropriate responses — a failure traditional perimeter security would never have caught.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q17" data-glean-id="detail-q17">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 6 — AI Security &middot; Q17</div>
+      <h2 class="detail-title">Securing Dev → Runtime Pipeline</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">An AI Program Owner thinks backups and Identity and Access Management (IAM) are enough to secure AI workloads. Explain how securing the pipeline from development and training (for example, data hygiene, privacy-enhancing technologies, static analysis) through runtime (guardrails, monitoring, cyber resilience) reduces their attack surface and operational risk.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Let&#x27;s walk the pipeline stage by stage. In development, data and code can be tampered with before a model ships — IAM confirms who had access, not whether data was manipulated. Across every handoff — ingest, feature engineering, training, deployment — there&#x27;s a potential injection point; backups help you recover after damage, not prevent it. At runtime, deployed models face prompt injection and data leakage in real time.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> securing the full pipeline adds overhead that can slow development velocity versus IAM and backups alone.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> layered defenses across the whole lifecycle actually reduce attack surface and operational risk.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> an attacker compromises a training data source for Honeywell&#x27;s predictive-maintenance model during development — IAM doesn&#x27;t flag it since access was authorized, and backups don&#x27;t help since the &#x27;bad&#x27; model is what gets deployed. Only pipeline-stage data integrity checks would have caught it.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q18" data-glean-id="detail-q18">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 6 — AI Security &middot; Q18</div>
+      <h2 class="detail-title">Platform Partner&#x27;s Security Role</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">In a joint meeting with a CISO and AI Officer, they ask why an infrastructure/platform partner should be part of their AI security strategy at all. Explain how a secure foundation, ecosystem integrations, and services from that partner can help build trust in AI deployments and what difference that makes to their ability to scale AI safely.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">A platform partner is what makes AI &#x27;safe to scale.&#x27; That&#x27;s three things: a secure foundation — hardened hardware, secure firmware, a validated supply chain; ecosystem integrations, so AI workloads inherit the controls you already rely on instead of creating blind spots; and services — AI-tuned threat detection and compliance support most internal teams can&#x27;t fully staff alone.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> relying on a partner for foundational security means ceding some control versus building everything in-house.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> tie this to KPIs — fewer high-severity incidents, faster compliance sign-offs, more AI projects reaching production — and bringing a partner like Dell in early avoids expensive security redesigns later.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell&#x27;s AI Officer wants to roll out GenAI across its aerospace, building, and PMT business units. Because the infrastructure partner provides a pre-validated, hardened platform, the CISO approves each new deployment faster instead of re-auditing security from scratch every time.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q19" data-glean-id="detail-q19">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 7 — AI Use Cases &middot; Q19</div>
+      <h2 class="detail-title">Prioritize &amp; Map AI Stack</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">A Head of Strategy has a long list of AI ideas but no plan. Explain how you would prioritize use cases with them and then map an end-to-end stack—from infrastructure through orchestration, data, software, and security—that can support both those initial use cases and future ones.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Let&#x27;s structure this as a roadmap. First, discovery and scoring — rank ideas on business value and feasibility, separating quick wins from strategic bets. Second, a first &#x27;wave&#x27; that delivers value now while building foundational platform capability. Third, platform-centric stack design — infrastructure, orchestration, a lakehouse, flexible software tooling, and full-stack security all in place from day one, not re-architected per idea.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> this takes more upfront architecture investment than building narrowly for the first few ideas.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> that investment turns a scattered list into a sustainable, scaling AI program.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell prioritizes a field-service chatbot as a quick win and predictive maintenance as a strategic bet. Because the platform underneath — built on Dell&#x27;s AI-optimized infrastructure — is built once, a third use case like compliance-document summarization gets added later without rebuilding anything.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q20" data-glean-id="detail-q20">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 7 — AI Use Cases &middot; Q20</div>
+      <h2 class="detail-title">Task → AI Pattern Mapping</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">You&#x27;re meeting with a Customer Success Manager who is overwhelmed by manual work (searching past tickets, writing follow-up emails, updating systems). Describe how you would identify which of their tasks are a good fit for AI (for example, retrieval, summarization, classification, generation), and explain how you&#x27;d map those tasks to specific AI workload patterns.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Let&#x27;s use a repeatable method: inventory the workflow, categorize each task by pattern — retrieve, summarize, classify, generate — assess impact and feasibility, then map each category to a concrete AI workload. Searching past tickets maps to retrieval-augmented generation. Writing follow-ups maps to generative AI drafting, reviewed before sending. Updating systems maps to lightweight automation extracting structured data.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> this requires upfront investment connecting ticket, email, and CRM systems to the AI tools, plus a review step for accuracy.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> the manager spends far less time on repetitive work and more on complex customer issues.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> a Honeywell customer support rep gets a new equipment-fault ticket — RAG instantly surfaces three similar past tickets and their fixes, GenAI drafts a follow-up referencing the resolution, and automation updates the CRM — turning a 20-minute process into a 2-minute review.</p>
+      </div>
+    </section>
+<section class="detail-view" id="detail-Q21" data-glean-id="detail-q21">
+      <button class="back-btn" onclick="showGrid()">&larr; Back to all questions</button>
+      <div class="detail-eyebrow">Module 7 — AI Use Cases &middot; Q21</div>
+      <h2 class="detail-title">AI Pilot Success Metrics</h2>
+      <div class="orig-question-block">
+        <div class="orig-label">Original Rubric Question</div>
+        <p class="orig-question-text">You are working with a Business Unit Leader who has already launched a couple of AI pilots and now wants to decide which ones to scale. Explain how you would define and track the right success metrics for AI use cases, and how those metrics would inform the decision to expand, refine, or retire each use case.</p>
+      </div>
+      <div class="answer-block">
+        <div class="answer-label-top">4/4 Interview-Ready Answer</div>
+        <p class="ans-para">Let&#x27;s build a measurement framework, not a gut call. Define business objectives and KPIs per use case before scaling — tied to why the pilot was launched. Capture a baseline. Run the pilot against agreed thresholds across business impact, adoption, quality, and operational cost. Review both quantitative results and qualitative feedback.</p>
+<p class="ans-para"><span class="ans-label">Trade-off:</span> rigorous metric tracking takes more time and discipline than scaling whatever &#x27;felt&#x27; successful.</p>
+<p class="ans-para"><span class="ans-label">Business outcome:</span> that discipline turns pilots into data-driven portfolio decisions, maximizing return on AI investment.</p>
+<p class="ans-para"><span class="ans-label">Example:</span> Honeywell&#x27;s AI-drafted service-report pilot shows high technician adoption and a measurable drop in report time — scale it org-wide. A second pilot, AI-based fault-priority scoring, shows low adoption because technicians don&#x27;t trust the scores — refine it with better explainability before any further rollout.</p>
+      </div>
+    </section>
+
+
+</div>
+
+<script>
+function showDetail(qnum) {
+  document.getElementById('front-grid').style.display = 'none';
+  document.querySelectorAll('.detail-view').forEach(function(el) { el.classList.remove('active'); });
+  var target = document.getElementById('detail-' + qnum);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+}
+function showGrid() {
+  document.querySelectorAll('.detail-view').forEach(function(el) { el.classList.remove('active'); });
+  document.getElementById('front-grid').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function filterQuestions(query) {
+  var q = query.trim().toLowerCase();
+  var visibleCount = 0;
+  document.querySelectorAll('.grid-row').forEach(function(row) {
+    var rowHasVisible = false;
+    row.querySelectorAll('.q-btn').forEach(function(btn) {
+      var onclickAttr = btn.getAttribute('onclick') || '';
+      var match = onclickAttr.match(/showDetail\('(Q\d+)'\)/);
+      var qnum = match ? match[1] : null;
+      var detailEl = qnum ? document.getElementById('detail-' + qnum) : null;
+      var haystack = (btn.textContent + ' ' + row.querySelector('.row-label').textContent + ' ' + (detailEl ? detailEl.textContent : '')).toLowerCase();
+      var isMatch = q === '' || haystack.indexOf(q) !== -1;
+      btn.classList.toggle('hidden', !isMatch);
+      if (isMatch) { rowHasVisible = true; visibleCount++; }
+    });
+    row.classList.toggle('hidden', !rowHasVisible);
+  });
+  var countEl = document.getElementById('search-count');
+  var noResultsEl = document.getElementById('no-results-msg');
+  if (q === '') {
+    countEl.textContent = '';
+  } else {
+    countEl.textContent = visibleCount + (visibleCount === 1 ? ' match' : ' matches');
+  }
+  if (noResultsEl) {
+    noResultsEl.classList.toggle('active', visibleCount === 0 && q !== '');
+  }
+  var clearBtn = document.getElementById('search-clear-btn');
+  if (clearBtn) {
+    clearBtn.classList.toggle('visible', q !== '');
+  }
+}
+
+function clearSearch() {
+  var input = document.getElementById('question-search-input');
+  input.value = '';
+  filterQuestions('');
+  input.focus();
+}
+
+function toggleCoachingPrompt() {
+  var panel = document.getElementById('coaching-prompt-panel');
+  var btn = document.getElementById('coaching-prompt-btn');
+  var isOpen = panel.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+}
+
+window.GleanBridge.postMessage({
+  actionId: 'export-pdf',
+  type: 'glean-add-menu',
+  metadata: { label: 'Export as PDF', icon: 'export' }
+});
+window.GleanBridge.onMessage('action', function(data) {
+  if (data.actionId === 'export-pdf') window.print();
+});
+</script>
+</body>
+</html>
